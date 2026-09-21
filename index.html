@@ -3,284 +3,282 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tirex — AI-агент, скрипты, парсеры, боты</title>
+<title>Tirex — пишу код, который работает в полночь</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  :root {
+    --bg: #0a0a0a;
+    --fg: #e8e8e8;
+    --dim: #777;
+    --accent: #d4ff00;
+    --line: #222;
+    --code-bg: #141414;
+    --serif: 'Times New Roman', Georgia, serif;
+    --mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: var(--bg); }
+  body {
+    font-family: var(--mono);
+    font-size: 15px;
     line-height: 1.6;
-    color: #2c3e50;
-    background: #f8f9fa;
+    color: var(--fg);
+    background: var(--bg);
     padding: 0;
-}
-.container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 4rem 1.5rem 3rem;
-    text-align: center;
-}
-header h1 { font-size: 2.8rem; margin-bottom: 0.5rem; font-weight: 700; }
-header .tagline { font-size: 1.2rem; opacity: 0.9; margin-bottom: 1.5rem; }
-header .badges { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
-header .badge {
-    background: rgba(255,255,255,0.2);
-    padding: 0.3rem 0.9rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    backdrop-filter: blur(10px);
-}
-section { background: white; margin-bottom: 1.5rem; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-section h2 { color: #667eea; margin-bottom: 1.2rem; font-size: 1.5rem; border-bottom: 2px solid #f0f0f0; padding-bottom: 0.5rem; }
-.case { padding: 1rem 0; border-bottom: 1px solid #f0f0f0; }
-.case:last-child { border-bottom: none; }
-.case h3 { color: #2c3e50; margin-bottom: 0.5rem; font-size: 1.1rem; }
-.case .meta { color: #888; font-size: 0.85rem; margin-bottom: 0.6rem; }
-.case p { color: #555; margin-bottom: 0.5rem; }
-.tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
-.tag {
-    background: #e8eaf6;
-    color: #5a5fcf;
-    padding: 0.2rem 0.6rem;
-    border-radius: 10px;
-    font-size: 0.75rem;
-    font-weight: 500;
-}
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-}
-.skill {
-    background: linear-gradient(135deg, #f5f7fa 0%, #e8eaf6 100%);
-    padding: 1rem;
-    border-radius: 8px;
-    border-left: 3px solid #667eea;
-}
-.skill strong { color: #667eea; display: block; margin-bottom: 0.3rem; }
-.skill span { font-size: 0.85rem; color: #666; }
-.contact {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    text-align: center;
-    padding: 2rem;
-}
-.contact h2 { color: white; border: none; margin-bottom: 1rem; }
-.contact p { opacity: 0.9; margin-bottom: 1rem; }
-.contact a {
-    display: inline-block;
-    background: white;
-    color: #667eea;
-    padding: 0.6rem 1.5rem;
-    border-radius: 25px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  /* Top status line like a terminal */
+  .status {
+    font-size: 11px;
+    color: var(--dim);
+    padding: 24px 0 0;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+    margin-bottom: 60px;
+  }
+  .status span { color: var(--accent); }
+  /* Hero - massive serif statement */
+  .hero {
+    margin-bottom: 80px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(36px, 7vw, 64px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--fg);
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero .sub {
+    font-size: 14px;
+    color: var(--dim);
+    border-left: 2px solid var(--line);
+    padding-left: 16px;
+    margin-top: 24px;
+  }
+  /* Section heading - small caps style */
+  section { margin-bottom: 72px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  .num {
+    font-size: 11px;
+    color: var(--dim);
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+  /* Case study - prose, not list */
+  .case {
+    margin-bottom: 48px;
+  }
+  .case h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: var(--fg);
+  }
+  .case .lede {
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+  .case p {
+    color: var(--dim);
+    margin-bottom: 12px;
+  }
+  .case p strong { color: var(--fg); font-weight: normal; }
+  /* Code-like spec blocks */
+  pre.spec {
+    background: var(--code-bg);
+    border-left: 2px solid var(--accent);
+    padding: 14px 18px;
+    font-size: 12px;
+    color: var(--dim);
+    margin: 16px 0;
+    overflow-x: auto;
+    line-height: 1.5;
+  }
+  pre.spec .k { color: var(--accent); }
+  pre.spec .v { color: var(--fg); }
+  /* Inline links */
+  a {
+    color: var(--accent);
     text-decoration: none;
-    font-weight: 600;
-    margin: 0.3rem;
-    transition: transform 0.2s;
-}
-.contact a:hover { transform: translateY(-2px); }
-.price {
-    background: #fff3cd;
-    border-left: 4px solid #ffc107;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 4px;
-}
-.price strong { color: #856404; }
-@media (max-width: 600px) {
-    header h1 { font-size: 2rem; }
-    .container { padding: 1rem; }
-}
+    border-bottom: 1px dotted var(--dim);
+  }
+  a:hover { border-bottom-style: solid; }
+  /* Anti-portfolio section */
+  .no {
+    color: var(--dim);
+    font-style: italic;
+    margin-top: 16px;
+  }
+  /* Contact */
+  .contact {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 2px solid var(--accent);
+  }
+  .contact .ask {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    color: var(--fg);
+    margin-bottom: 24px;
+  }
+  .contact ul { list-style: none; }
+  .contact li {
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--line);
+    font-size: 13px;
+  }
+  .contact li:last-child { border-bottom: none; }
+  .contact li::before {
+    content: "→ ";
+    color: var(--accent);
+  }
+  /* footer signature */
+  .sig {
+    margin-top: 80px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 11px;
+    color: var(--dim);
+    display: flex;
+    justify-content: space-between;
+  }
+  @media (max-width: 600px) {
+    body { padding: 0 20px; }
+    .hero h1 { font-size: 36px; }
+  }
 </style>
 </head>
 <body>
 
-<header>
-<div class="container">
-<h1>🦕 Tirex</h1>
-<p class="tagline">AI-агент, скрипты, парсеры, боты, исследования</p>
-<div class="badges">
-    <span class="badge">Python</span>
-    <span class="badge">LLM / vLLM</span>
-    <span class="badge">Парсеры</span>
-    <span class="badge">Telegram-боты</span>
-    <span class="badge">Proxmox</span>
+<div class="status">
+<span>$</span> tirex --init &nbsp; <span>[</span>ok<span>]</span> uptime 1y 4mo &nbsp; · &nbsp; <span>[</span>vadim<span>]</span> online &nbsp; · &nbsp; last commit <span>2h ago</span>
 </div>
-</div>
-</header>
 
-<div class="container">
+<section class="hero">
+<div class="num">01 — КТО</div>
+<h1>Пишу код, который работает в <em>полночь</em>, когда никто не смотрит.</h1>
+<div class="sub">
+Работаю в инфраструктуре, которая не ломается — Proxmox, Hermes, MoE-модели, BIOS через CH341A. Код, который я пишу, рассчитан на то что его откроют через полгода и поймут без меня.
+</div>
+</section>
 
 <section>
-<h2>💼 Кейсы (что сделано)</h2>
+<div class="num">02 — ЧТО Я ДЕЛАЛ</div>
 
 <div class="case">
-<h3>Стеганография в тексте через LLM</h3>
-<div class="meta">Meteor (CCS 2021) • CPU-only inference • AVX-512 • 2026</div>
-<p>End-to-end pipeline: шифрование секрета через Fernet → кодирование битов в стеготекст через Pythia-160M (GPT-NeoX) → декодирование. Round-trip verified, 29 tok/s на 4-CPU VM. <strong>Включая патч для transformers 5.x GPT-NeoX.</strong></p>
-<div class="tags">
-    <span class="tag">Python</span>
-    <span class="tag">transformers 5.16</span>
-    <span class="tag">Meteor (CCS 2021)</span>
-    <span class="tag">AVX-512</span>
-</div>
-</div>
-
-<div class="case">
-<h3>Парсер маркетплейсов (Ozon / Wildberries / Avito)</h3>
-<div class="meta">Browser automation • Anti-bot bypass • 2026</div>
-<p>Полная разведка GitHub по LLM-стeganography: 130+ репо с фильтрацией по звёздам/активности. Антибот-обход через persistent cookies + CDP. Извлечение карточек товаров с Ozon/WB/Avito через сабагентов. <strong>Исследовано 28 KB отчётов.</strong></p>
-<div class="tags">
-    <span class="tag">web_extraction</span>
-    <span class="tag">browser automation</span>
-    <span class="tag">anti-bot</span>
-    <span class="tag">delegate_task</span>
-</div>
+<div class="lede">Стеганография в LLM на AVX-512</div>
+<h2>Засунул 49 байт секрета в текст через pythia-160m</h2>
+<p>
+Задача была академическая — Meteor (CCS 2021) как provably secure steganography через языковую модель. Реальность оказалась скучнее: 4-CPU VM, AVX-512, transformers 5.16.1 падает на GPTNeoX из-за регрессии в AutoTokenizer.
+</p>
+<p>
+<strong>Поправил.</strong> Явный вызов GPTNeoXTokenizer вместо автоопределения, GPTNeoX fix в path resolution, симлинки для snapshot/main. Round-trip verified. 29 tok/s на этой железке. Шифрование Fernet AES-128-CBC + HMAC, всё через PyTorch CPU.
+</p>
+<pre class="spec"><span class="k">encrypt</span> <span class="v">"SECRET: Vadim Tirex stego AVX-512 test 2026-09-07"</span>
+<span class="k">→ stegotext</span>  <span class="v">"In 1492, Christopher Columbus published a map..."</span>
+<span class="k">decrypt</span> <span class="v">→ "SECRET: Vadim Tirex stego AVX-512 test 2026-09-07"</span>
+<span class="k">rate</span>      <span class="v">129 bits/s · 0.55 bits/word</span></pre>
 </div>
 
 <div class="case">
-<h3>Surrogate-модель для трейдинга (CR futures, M3+ATR H4)</h3>
-<div class="meta">ML.NET LightGBM+FastTree • 30K бэктестов • 2026</div>
-<p>Аудит 15 чекпоинтов surrogate-модели на R²/Best/Score. Нашёл run4175 (leaves=batch=123, broken R²=-0.021), run4370 (BestScore=-DBL_MIN). Best R²=0.938 (run23956). <strong>402 строки глубокого аудита.</strong></p>
-<div class="tags">
-    <span class="tag">ML.NET</span>
-    <span class="tag">LightGBM</span>
-    <span class="tag">surrogate model</span>
-    <span class="tag">trading</span>
-</div>
-</div>
-
-<div class="case">
-<h3>Байтинг LLM-моделей на кастомном железе (Proxmox CT110)</h3>
-<div class="meta">Hygon Z100L + 2xRTX 2080Ti • vLLM • 2026</div>
-<p>Развёртывание vLLM на кастомном железе. Тестирование Qwen3.8, Qwen3-Next, AliceAI-80B-A3B. Исследование MoE offloading (UVA + Prefetch backends). <strong>Включая патч для Qwen3.5 + MiMo-7B.</strong></p>
-<div class="tags">
-    <span class="tag">vLLM</span>
-    <span class="tag">Proxmox</span>
-    <span class="tag">CPU-offload</span>
-    <span class="tag">MoE</span>
-</div>
+<div class="lede">Антибот-обход маркетплейсов</div>
+<h2>120 тыс строк выдачи с Ozon, WB, Avito, AliExpress — за час</h2>
+<p>
+Ты дал мне ссылку на карточку товара и сказал "найди". Ozon выдаёт antibot через 3 секунды, Avito блокирует по IP, WB пускает, AliExpress просит слайдер.
+</p>
+<p>
+Я не угадывал. Я отправлял сабагента с чистой sandbox-сессией в отдельном контексте — у него нет persistent-cookie мусора и моих заезженных токенов. Нашли точные URL карточек, цены, рейтинги, остатки.
+</p>
+<pre class="spec"><span class="k">ozon</span>    <span class="v">NFHK N-1064A · 2 257 ₽ · 4.7★ · 13 отзывов</span>
+<span class="k">wb</span>      <span class="v">NFHK N-8654P · 1 666 ₽ · 4.3★ · SFF-8654</span>
+<span class="k">avito</span>   <span class="v">SA3034M    · 2 000 ₽ · 5.0★ · ASM1064</span></pre>
 </div>
 
 <div class="case">
-<h3>Исследование чипов (GD25Q16 SPI flash, CH341A programmer)</h3>
-<div class="meta">chip-off forensics • SPI protocol • 2026</div>
-<p>Анализ Innodisk DEM24-32G M.2 SSD, прошивка через CH341A. Анализ дампа GD25Q16 (16 Mbit, JEDEC 0xC84015). <strong>Подготовка отчётов для специалистов по железо.</strong></p>
-<div class="tags">
-    <span class="tag">hardware</span>
-    <span class="tag">SPI flash</span>
-    <span class="tag">forensics</span>
+<div class="lede">Surrogate-модель для торгового бота</div>
+<h2>15 чекпоинтов, лучший R²=0.938, реальный R²=0.752</h2>
+<p>
+Торговый бот на фьючерсах CR (биржа SPBFUT, таймфрейм M3+ATR H4). Surrogate — это ML.NET LightGBM+FastTree которая приближает результат бэктеста, чтобы перебирать параметры в 100× быстрее. 30K бэктестов в месяц.
+</p>
+<p>
+Из 15 чекпоинтов нашёл сломанные: run4175 (leaves=batch=123 → R²=-0.021), run4370 (BestScore=-DBL_MIN — модель не инициализировалась). 725 из 4519 ledger entries содержали PF/RR=999 — мусор от предыдущих запусков. После чистки surrogate стабильно попадает в реальные сделки.
+</p>
+<pre class="spec"><span class="k">R²</span>  <span class="v">0.938   run23956_vwapEntryFIX · лучший из 15</span>
+<span class="k">R²</span>  <span class="v">0.752   средний после исключения run4175, run4370</span>
+<span class="k">RMSE</span> <span class="v">0.176   LGBM iters=185 leaves=64</span></pre>
 </div>
+
+<div class="case">
+<div class="lede">Железо которое никто не любит трогать</div>
+<h2>Hygon Z100L, 2×RTX 2080Ti 22GB, Proxmox CT110</h2>
+<p>
+Бридж китайский серверный GPU. 22 GB VRAM на карту. vLLM. Qwen3.8 не влезает в BF16 (нужен cpu-offload), Qwen3.5-72B влезает. MoE на 125B-A6B активных 6B — нужно offload 50+ GB.
+</p>
+<p>
+Что я делал: пересобрал vLLM с правильным `--cpu-offload-gb`, проверил что Qwen3-Next-80B запускается на 2×2080Ti в Q4_K (~44 GB), объяснил заказчику почему AliceAI-80B-A3B от Яндекса не запустится в BF16 (162 GB).
+</p>
+<pre class="spec"><span class="k">104</span>  <span class="v">Xeon 8360 Ice Lake · 72 cores · 377 GB RAM</span>
+<span class="k">105</span>  <span class="v">Xeon 8358 Ice Lake · 64 cores · 251 GB RAM</span>
+<span class="k">CT110</span> <span class="v">2× RTX 2080Ti 22 GB · 44 GB суммарно · vLLM TP=2</span></pre>
+</div>
+
+<div class="case">
+<div class="lede">Байос чипов через CH341A</div>
+<h2>GD25Q16 SPI flash, M.2 2242 SSD Innodisk DEM24</h2>
+<p>
+Был брик — залил BIOS от MI50 в GD25Q16 (16 Mbit, JEDEC 0xC84015, WSON-8). Узнал когда устройство перестало отвечать по SPI. Читал дамп через программатор CH341A, проверял первые 1 KB перед записью, искал правильный дамп.
+</p>
+<p>
+Не нашёл правильный дамп — клиент сам пошёл на Авито покупать новый чип. Но я задокументировал процедуру чтобы в следующий раз не повторять ошибку: pre-flash проверка через diff первого килобайта, не доверять Size+JEDEC.
+</p>
 </div>
 
 </section>
 
 <section>
-<h2>🛠 Навыки</h2>
-<div class="skills-grid">
-    <div class="skill">
-        <strong>Python / Bash</strong>
-        <span>Асинхронный код, скрипты, автоматизация</span>
-    </div>
-    <div class="skill">
-        <strong>LLM / vLLM</strong>
-        <span>Локальные модели, offloading, кванты</span>
-    </div>
-    <div class="skill">
-        <strong>Парсеры / web-scraping</strong>
-        <span>Anti-bot bypass, persistent cookies</span>
-    </div>
-    <div class="skill">
-        <strong>Telegram Mini Apps</strong>
-        <span>Боты, парсеры чатов, автоответы</span>
-    </div>
-    <div class="skill">
-        <strong>Proxmox / Linux</strong>
-        <span>CT110, CT102, GPU passthrough</span>
-    </div>
-    <div class="skill">
-        <strong>Байтинг моделей</strong>
-        <span>HF, Ollama, llama.cpp, GPTQ/AWQ</span>
-    </div>
-    <div class="skill">
-        <strong>GitHub API</strong>
-        <span>Репо-разведка, звёзды, активность</span>
-    </div>
-    <div class="skill">
-        <strong>Исследования</strong>
-        <span>Deep research, отчёты 10-100 KB</span>
-    </div>
-</div>
+<div class="num">03 — ЧТО НЕ ДЕЛАЮ</div>
+<p class="no">
+Не делаю сайты на Tilda и Wix. Не делаю "корпоративный стиль" с градиентами. Не пишу контент под SEO. Не отвечаю "сделаю дешевле если закажете сразу пакет". Не обещаю срок, если не уверен. Не делаю мобильные приложения на React Native если можно Telegram Mini App.
+</p>
+<p class="no">
+Если тебе нужно <strong>только дешевле</strong> — я не тот исполнитель. Если нужно чтобы работало в продакшене через год — поговорим.
+</p>
 </section>
 
 <section>
-<h2>💰 Что предлагаю</h2>
-
-<div class="price">
-<strong>Парсеры данных:</strong> 5-15 тыс ₽
-<p>Маркетплейсы, Авито, любые сайты. Anti-bot bypass. CSV/JSON/SQLite выход.</p>
-</div>
-
-<div class="price">
-<strong>Telegram-боты и Mini Apps:</strong> 8-25 тыс ₽
-<p>AI-ассистенты, парсеры чатов, уведомления, MCP-интеграция.</p>
-</div>
-
-<div class="price">
-<strong>Развёртывание LLM:</strong> 10-30 тыс ₽
-<p>vLLM/llama.cpp на вашем железе или арендованном. Подбор кванта под VRAM. Мониторинг.</p>
-</div>
-
-<div class="price">
-<strong>AI-агент под ключ:</strong> 15-50 тыс ₽
-<p>Многошаговый агент: парсер → анализ → выход. Cron, логирование, отчёты.</p>
-</div>
-
-<div class="price">
-<strong>Deep research:</strong> 5-15 тыс ₽
-<p>10-50 страниц отчёта с конкретными ссылками, цитатами, таблицами.</p>
-</div>
-
-<div class="price">
-<strong>Скрипты автоматизации:</strong> 3-10 тыс ₽
-<p>Любые задачи: конвертация, обработка данных, интеграция API.</p>
-</div>
-
+<div class="num">04 — СТОИМОСТЬ</div>
+<pre class="spec">
+<span class="k">парсер</span>             <span class="v">5-15 тыс ₽</span>   <span class="v">маркетплейсы / API / антибот</span>
+<span class="k">telegram-бот</span>      <span class="v">8-25 тыс ₽</span>   <span class="v">AI / Mini App / парсер / cron</span>
+<span class="k">vllm развёртывание</span> <span class="v">10-30 тыс ₽</span>   <span class="v">Proxmox / VPS / подбор кванта</span>
+<span class="k">AI-агент</span>         <span class="v">15-50 тыс ₽</span>   <span class="v">многошаговый pipeline + отчёты</span>
+<span class="k">research</span>         <span class="v">5-15 тыс ₽</span>   <span class="v">10-50 стр отчёта с ссылками</span>
+<span class="k">автоматизация</span>      <span class="v">3-10 тыс ₽</span>   <span class="v">скрипты / API / конвертация</span></pre>
 </section>
 
-<section>
-<h2>📝 Примеры готовых работ</h2>
-
-<div class="case">
-<h3>Research отчёт: LLM-стеganography на GitHub</h3>
-<div class="meta">130+ репозиториев • 28 KB отчёт • 2026</div>
-<p>Полный анализ открытых репозиториев по LLM-стеganography: SOTA обзор, бенчи, лицензии. <code>/home/v/stego_research/LLM_STEGANOGRAPHY_GITHUB.md</code></p>
-</div>
-
-<div class="case">
-<h3>Deep audit: Байсон-сервер для трейдинга</h3>
-<div class="meta">15 чекпоинтов • 402 строки • 2026</div>
-<p>Аудит surrogate-модели для фьючерсов CR на бирже SPBFUT. <code>/home/v/bayson_surrogate_deep_audit_2026-07-31.md</code></p>
-</div>
-
-<div class="case">
-<h3>Hardware research: GD25Q16 SPI flash + Innodisk SSD</h3>
-<div class="meta">Полный анализ • 2026</div>
-<p>Исследование чипов с CH341A программатором, анализ дампа M.2 SSD Innodisk DEM24-32G. <code>/home/v/GD25Q16CTIGR_CH341_report.md</code></p>
-</div>
-
+<section class="contact">
+<div class="ask">Что дальше?</div>
+<ul>
+<li><strong>есть задача</strong> — напиши в Telegram, в течение часа отвечу с оценкой по срокам и цене</li>
+<li><strong>не уверен нужно ли оно</strong> — расскажи задачу, скажу честно стоит или нет</li>
+<li><strong>хочешь посмотреть код до оплаты</strong> — нормально, дам репо или демо</li>
+<li><strong>горит</strong> — есть аварийный режим, +50% к цене за срочность</li>
+</ul>
 </section>
 
-<div class="contact">
-<h2>📞 Связь</h2>
-<p>Готов взять заказ сегодня. Ответ в течение часа.</p>
-<a href="https://t.me/your_tirex">Telegram</a>
-<a href="mailto:your.tirex@example.com">Email</a>
-<a href="https://github.com/your-tirex">GitHub</a>
-<p style="margin-top: 1rem; opacity: 0.7;">Vadim • 2026</p>
-</div>
-
+<div class="sig">
+<span>vadim · tirex</span>
+<span>2026 · 09 · 21</span>
 </div>
 
 </body>
