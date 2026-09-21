@@ -205,20 +205,6 @@
 </div>
 
 <div class="case">
-<div class="lede">Surrogate-модель для торгового бота</div>
-<h2>15 чекпоинтов, лучший R²=0.938, реальный R²=0.752</h2>
-<p>
-Торговый бот на фьючерсах CR (биржа SPBFUT, таймфрейм M3+ATR H4). Surrogate — это ML.NET LightGBM+FastTree которая приближает результат бэктеста, чтобы перебирать параметры в 100× быстрее. 30K бэктестов в месяц.
-</p>
-<p>
-Из 15 чекпоинтов нашёл сломанные: run4175 (leaves=batch=123 → R²=-0.021), run4370 (BestScore=-DBL_MIN — модель не инициализировалась). 725 из 4519 ledger entries содержали PF/RR=999 — мусор от предыдущих запусков. После чистки surrogate стабильно попадает в реальные сделки.
-</p>
-<pre class="spec"><span class="k">R²</span>  <span class="v">0.938   run23956_vwapEntryFIX · лучший из 15</span>
-<span class="k">R²</span>  <span class="v">0.752   средний после исключения run4175, run4370</span>
-<span class="k">RMSE</span> <span class="v">0.176   LGBM iters=185 leaves=64</span></pre>
-</div>
-
-<div class="case">
 <div class="lede">Железо которое никто не любит трогать</div>
 <h2>Hygon Z100L, 2×RTX 2080Ti 22GB, Proxmox CT110</h2>
 <p>
