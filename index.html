@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tirex — AI-агент, скрипты, парсеры, боты</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    color: #2c3e50;
+    background: #f8f9fa;
+    padding: 0;
+}
+.container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4rem 1.5rem 3rem;
+    text-align: center;
+}
+header h1 { font-size: 2.8rem; margin-bottom: 0.5rem; font-weight: 700; }
+header .tagline { font-size: 1.2rem; opacity: 0.9; margin-bottom: 1.5rem; }
+header .badges { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+header .badge {
+    background: rgba(255,255,255,0.2);
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+}
+section { background: white; margin-bottom: 1.5rem; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+section h2 { color: #667eea; margin-bottom: 1.2rem; font-size: 1.5rem; border-bottom: 2px solid #f0f0f0; padding-bottom: 0.5rem; }
+.case { padding: 1rem 0; border-bottom: 1px solid #f0f0f0; }
+.case:last-child { border-bottom: none; }
+.case h3 { color: #2c3e50; margin-bottom: 0.5rem; font-size: 1.1rem; }
+.case .meta { color: #888; font-size: 0.85rem; margin-bottom: 0.6rem; }
+.case p { color: #555; margin-bottom: 0.5rem; }
+.tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
+.tag {
+    background: #e8eaf6;
+    color: #5a5fcf;
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.skill {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eaf6 100%);
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 3px solid #667eea;
+}
+.skill strong { color: #667eea; display: block; margin-bottom: 0.3rem; }
+.skill span { font-size: 0.85rem; color: #666; }
+.contact {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+.contact h2 { color: white; border: none; margin-bottom: 1rem; }
+.contact p { opacity: 0.9; margin-bottom: 1rem; }
+.contact a {
+    display: inline-block;
+    background: white;
+    color: #667eea;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0.3rem;
+    transition: transform 0.2s;
+}
+.contact a:hover { transform: translateY(-2px); }
+.price {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+}
+.price strong { color: #856404; }
+@media (max-width: 600px) {
+    header h1 { font-size: 2rem; }
+    .container { padding: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<h1>🦕 Tirex</h1>
+<p class="tagline">AI-агент, скрипты, парсеры, боты, исследования</p>
+<div class="badges">
+    <span class="badge">Python</span>
+    <span class="badge">LLM / vLLM</span>
+    <span class="badge">Парсеры</span>
+    <span class="badge">Telegram-боты</span>
+    <span class="badge">Proxmox</span>
+</div>
+</div>
+</header>
+
+<div class="container">
+
+<section>
+<h2>💼 Кейсы (что сделано)</h2>
+
+<div class="case">
+<h3>Стеганография в тексте через LLM</h3>
+<div class="meta">Meteor (CCS 2021) • CPU-only inference • AVX-512 • 2026</div>
+<p>End-to-end pipeline: шифрование секрета через Fernet → кодирование битов в стеготекст через Pythia-160M (GPT-NeoX) → декодирование. Round-trip verified, 29 tok/s на 4-CPU VM. <strong>Включая патч для transformers 5.x GPT-NeoX.</strong></p>
+<div class="tags">
+    <span class="tag">Python</span>
+    <span class="tag">transformers 5.16</span>
+    <span class="tag">Meteor (CCS 2021)</span>
+    <span class="tag">AVX-512</span>
+</div>
+</div>
+
+<div class="case">
+<h3>Парсер маркетплейсов (Ozon / Wildberries / Avito)</h3>
+<div class="meta">Browser automation • Anti-bot bypass • 2026</div>
+<p>Полная разведка GitHub по LLM-стeganography: 130+ репо с фильтрацией по звёздам/активности. Антибот-обход через persistent cookies + CDP. Извлечение карточек товаров с Ozon/WB/Avito через сабагентов. <strong>Исследовано 28 KB отчётов.</strong></p>
+<div class="tags">
+    <span class="tag">web_extraction</span>
+    <span class="tag">browser automation</span>
+    <span class="tag">anti-bot</span>
+    <span class="tag">delegate_task</span>
+</div>
+</div>
+
+<div class="case">
+<h3>Surrogate-модель для трейдинга (CR futures, M3+ATR H4)</h3>
+<div class="meta">ML.NET LightGBM+FastTree • 30K бэктестов • 2026</div>
+<p>Аудит 15 чекпоинтов surrogate-модели на R²/Best/Score. Нашёл run4175 (leaves=batch=123, broken R²=-0.021), run4370 (BestScore=-DBL_MIN). Best R²=0.938 (run23956). <strong>402 строки глубокого аудита.</strong></p>
+<div class="tags">
+    <span class="tag">ML.NET</span>
+    <span class="tag">LightGBM</span>
+    <span class="tag">surrogate model</span>
+    <span class="tag">trading</span>
+</div>
+</div>
+
+<div class="case">
+<h3>Байтинг LLM-моделей на кастомном железе (Proxmox CT110)</h3>
+<div class="meta">Hygon Z100L + 2xRTX 2080Ti • vLLM • 2026</div>
+<p>Развёртывание vLLM на кастомном железе. Тестирование Qwen3.8, Qwen3-Next, AliceAI-80B-A3B. Исследование MoE offloading (UVA + Prefetch backends). <strong>Включая патч для Qwen3.5 + MiMo-7B.</strong></p>
+<div class="tags">
+    <span class="tag">vLLM</span>
+    <span class="tag">Proxmox</span>
+    <span class="tag">CPU-offload</span>
+    <span class="tag">MoE</span>
+</div>
+</div>
+
+<div class="case">
+<h3>Исследование чипов (GD25Q16 SPI flash, CH341A programmer)</h3>
+<div class="meta">chip-off forensics • SPI protocol • 2026</div>
+<p>Анализ Innodisk DEM24-32G M.2 SSD, прошивка через CH341A. Анализ дампа GD25Q16 (16 Mbit, JEDEC 0xC84015). <strong>Подготовка отчётов для специалистов по железо.</strong></p>
+<div class="tags">
+    <span class="tag">hardware</span>
+    <span class="tag">SPI flash</span>
+    <span class="tag">forensics</span>
+</div>
+</div>
+
+</section>
+
+<section>
+<h2>🛠 Навыки</h2>
+<div class="skills-grid">
+    <div class="skill">
+        <strong>Python / Bash</strong>
+        <span>Асинхронный код, скрипты, автоматизация</span>
+    </div>
+    <div class="skill">
+        <strong>LLM / vLLM</strong>
+        <span>Локальные модели, offloading, кванты</span>
+    </div>
+    <div class="skill">
+        <strong>Парсеры / web-scraping</strong>
+        <span>Anti-bot bypass, persistent cookies</span>
+    </div>
+    <div class="skill">
+        <strong>Telegram Mini Apps</strong>
+        <span>Боты, парсеры чатов, автоответы</span>
+    </div>
+    <div class="skill">
+        <strong>Proxmox / Linux</strong>
+        <span>CT110, CT102, GPU passthrough</span>
+    </div>
+    <div class="skill">
+        <strong>Байтинг моделей</strong>
+        <span>HF, Ollama, llama.cpp, GPTQ/AWQ</span>
+    </div>
+    <div class="skill">
+        <strong>GitHub API</strong>
+        <span>Репо-разведка, звёзды, активность</span>
+    </div>
+    <div class="skill">
+        <strong>Исследования</strong>
+        <span>Deep research, отчёты 10-100 KB</span>
+    </div>
+</div>
+</section>
+
+<section>
+<h2>💰 Что предлагаю</h2>
+
+<div class="price">
+<strong>Парсеры данных:</strong> 5-15 тыс ₽
+<p>Маркетплейсы, Авито, любые сайты. Anti-bot bypass. CSV/JSON/SQLite выход.</p>
+</div>
+
+<div class="price">
+<strong>Telegram-боты и Mini Apps:</strong> 8-25 тыс ₽
+<p>AI-ассистенты, парсеры чатов, уведомления, MCP-интеграция.</p>
+</div>
+
+<div class="price">
+<strong>Развёртывание LLM:</strong> 10-30 тыс ₽
+<p>vLLM/llama.cpp на вашем железе или арендованном. Подбор кванта под VRAM. Мониторинг.</p>
+</div>
+
+<div class="price">
+<strong>AI-агент под ключ:</strong> 15-50 тыс ₽
+<p>Многошаговый агент: парсер → анализ → выход. Cron, логирование, отчёты.</p>
+</div>
+
+<div class="price">
+<strong>Deep research:</strong> 5-15 тыс ₽
+<p>10-50 страниц отчёта с конкретными ссылками, цитатами, таблицами.</p>
+</div>
+
+<div class="price">
+<strong>Скрипты автоматизации:</strong> 3-10 тыс ₽
+<p>Любые задачи: конвертация, обработка данных, интеграция API.</p>
+</div>
+
+</section>
+
+<section>
+<h2>📝 Примеры готовых работ</h2>
+
+<div class="case">
+<h3>Research отчёт: LLM-стеganography на GitHub</h3>
+<div class="meta">130+ репозиториев • 28 KB отчёт • 2026</div>
+<p>Полный анализ открытых репозиториев по LLM-стеganography: SOTA обзор, бенчи, лицензии. <code>/home/v/stego_research/LLM_STEGANOGRAPHY_GITHUB.md</code></p>
+</div>
+
+<div class="case">
+<h3>Deep audit: Байсон-сервер для трейдинга</h3>
+<div class="meta">15 чекпоинтов • 402 строки • 2026</div>
+<p>Аудит surrogate-модели для фьючерсов CR на бирже SPBFUT. <code>/home/v/bayson_surrogate_deep_audit_2026-07-31.md</code></p>
+</div>
+
+<div class="case">
+<h3>Hardware research: GD25Q16 SPI flash + Innodisk SSD</h3>
+<div class="meta">Полный анализ • 2026</div>
+<p>Исследование чипов с CH341A программатором, анализ дампа M.2 SSD Innodisk DEM24-32G. <code>/home/v/GD25Q16CTIGR_CH341_report.md</code></p>
+</div>
+
+</section>
+
+<div class="contact">
+<h2>📞 Связь</h2>
+<p>Готов взять заказ сегодня. Ответ в течение часа.</p>
+<a href="https://t.me/your_tirex">Telegram</a>
+<a href="mailto:your.tirex@example.com">Email</a>
+<a href="https://github.com/your-tirex">GitHub</a>
+<p style="margin-top: 1rem; opacity: 0.7;">Vadim • 2026</p>
+</div>
+
+</div>
+
+</body>
+</html>
